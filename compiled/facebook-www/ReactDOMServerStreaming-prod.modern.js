@@ -1844,7 +1844,7 @@ function pushStartInstance(
             nonce: props.nonce,
             type: props.type,
             fetchPriority: props.fetchPriority,
-            referrerPolicy: props.refererPolicy
+            referrerPolicy: props.referrerPolicy
           })),
           0 <= (headers.remainingCapacity -= header.length + 2))
             ? ((renderState.resets.image[key$jscomp$0] = PRELOAD_NO_CREDS),
@@ -3810,7 +3810,7 @@ function RequestInstance(
   this.clientRenderedBoundaries = [];
   this.completedBoundaries = [];
   this.partialBoundaries = [];
-  this.trackedPostpones = null;
+  this.postponedState = this.trackedPostpones = null;
   this.onError = void 0 === onError ? defaultErrorHandler : onError;
   this.onAllReady = void 0 === onAllReady ? noop : onAllReady;
   this.onShellReady = void 0 === onShellReady ? noop : onShellReady;
@@ -6609,6 +6609,8 @@ function flushCompletedQueues(request, destination) {
     }
   } finally {
     (flushingPartialBoundaries = !1),
+      (i = request.postponedState),
+      null !== i && (i.nextSegmentId = request.nextSegmentId),
       0 === request.allPendingTasks &&
         0 === request.clientRenderedBoundaries.length &&
         0 === request.completedBoundaries.length &&
